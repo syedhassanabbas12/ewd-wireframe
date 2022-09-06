@@ -3,15 +3,41 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
+    <link rel="stylesheet" href="styles.css" />
+    <!-- <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+
+    <script
+      src="https://unpkg.com/react@latest/umd/react.development.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
+    <script
+      src="https://unpkg.com/@mui/material@latest/umd/material-ui.development.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/babel-standalone@latest/babel.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Fonts to support Material Design -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <!-- Icons to support Material Design -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
   </head>
-  <body style="font-family: Verdana">
-    <!-- header -->
+  <!-- <body style="font-family: Verdana">
     <div
       class="jumbotron jumbotron-fluid"
       style="background-color: rgb(45, 110, 190)"
@@ -20,12 +46,7 @@
         <h3 style="color: white">EWD - Dashboard</h3>
       </div>
     </div>
-    <!-- <div class="container">
-      <h1>EWD - Dashboard</h1>
-      <p>Logo Here</p>
-    </div> -->
 
-    <!-- first table -->
     <div
       class="container table-responsive"
       style="
@@ -38,10 +59,10 @@
       <div class="Row pull-left">
         <div class="Row text-left"><strong>Exceptions List</strong></div>
         <button>filter</button>
-        <button>excel</button>
+        <i class="fas fa-file-excel fa-4x" style="color:green"></i>
       </div>
       <table class="table table-bordered">
-        <tr>
+        <tr class="text-center">
           <th>Status</th>
           <th>Driver Name</th>
           <th>Trip No.</th>
@@ -88,7 +109,6 @@
       </ul>
     </div>
 
-    <!-- second table -->
     <div
       class="container table-responsive"
       style="
@@ -209,9 +229,9 @@
         <li><a href="#">4</a></li>
         <li><a href="#">5</a></li>
       </ul>
+      <i class="fas fa-clock"></i>
     </div>
 
-    <!-- foooter -->
     <div
       style="
         background-color: #f1f1f1;
@@ -225,5 +245,242 @@
       w3schools.com. Resize the browser window to see the content respond to the
       resizing.
     </div>
-  </body>
+  </body> -->
+
+  <div id="root"></div>
+  <script type="text/babel" src=""></script>
+
+  <script type="text/babel">
+    const {
+      colors,
+      CssBaseline,
+      ThemeProvider,
+      Typography,
+      Container,
+      createTheme,
+      Box,
+      SvgIcon,
+      Link,
+      Pagination,
+      TableContainer,
+      Table,
+      TableHead,
+      TableRow,
+      TableCell,
+      Paper,
+      TableBody,
+      Grid,
+      Icon,
+      TableSortLabel,
+      Select,
+      MenuItem,
+      // Modal,
+      Button,
+    } = MaterialUI;
+
+    const rows = [
+      {
+        status: "icon1",
+        driverName: "Sanya Koch",
+        tripNo: "50010",
+        fleetNo: "1005",
+        location: "Success, WA",
+        workedTime: "4h 25m of 5h 30m",
+        remainingTime: "-",
+        nextBreak: "-",
+        breach: "Fatigue rule - 5h 30m",
+        lastUpdated: "20/05/2022 14:30:00",
+        className: "row-color-gray",
+      },
+      {
+        status: "icon1",
+        driverName: "Sanya Koch",
+        tripNo: "50010",
+        fleetNo: "1005",
+        location: "Success, WA",
+        workedTime: "4h 25m of 5h 30m",
+        remainingTime: "-",
+        nextBreak: "-",
+        breach: "Fatigue rule - 5h 30m",
+        lastUpdated: "20/05/2022 14:30:00",
+        className: "row-color-green",
+      },
+    ];
+
+    const columns = [
+      { id: "status", name: "Status" },
+      { id: "driverName", name: "Driver Name" },
+      { id: "tripNo", name: "Trip No" },
+      { id: "fleetNo", name: "Driver Fleet No" },
+      { id: "location", name: "Location" },
+      { id: "workedTime", name: "Worked Time" },
+      { id: "remainingTime", name: "Remaining Time" },
+      { id: "nextBreak", name: "Next Break due in" },
+      { id: "breach", name: "Breach" },
+      { id: "lastUpdated", name: "Last Updated" },
+    ];
+
+    // Create a theme instance.
+    const theme = createTheme({
+      palette: {
+        primary: {
+          main: "#556cd6",
+        },
+        secondary: {
+          main: "#19857b",
+        },
+        error: {
+          main: colors.red.A400,
+        },
+      },
+    });
+
+    function LightBulbIcon(props) {
+      return (
+        <SvgIcon {...props}>
+          <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z" />
+        </SvgIcon>
+      );
+    }
+
+    function ProTip() {
+      return (
+        <Typography sx={{ mt: 6, mb: 3 }} color="text.secondary">
+          <LightBulbIcon sx={{ mr: 1, verticalAlign: "top" }} />
+          Pro tip: See more{" "}
+          <Link href="https://mui.com/getting-started/templates/">
+            templates
+          </Link>{" "}
+          on the MUI documentation.
+        </Typography>
+      );
+    }
+
+    function Copyright() {
+      return (
+        <Typography variant="body2" color="text.secondary" align="center">
+          {"Copyright © "}
+          <Link color="inherit" href="https://mui.com/">
+            Your Website
+          </Link>{" "}
+          {new Date().getFullYear()}
+          {"."}
+        </Typography>
+      );
+    }
+
+    function DataTable(title, noOfRows) {
+      let Rows = [];
+      for (let i = 0; i < noOfRows; i += 2) {
+        Rows.push(rows[0]);
+        Rows.push(rows[1]);
+      }
+      return (
+        <div>
+          <Typography variant="h6" component="h6" gutterBottom>
+            {title}
+          </Typography>
+
+          <Grid item xs={12}>
+            <Icon>tune</Icon>
+            {"\t"}
+            <Icon>insert_drive_file</Icon>
+          </Grid>
+          <TableContainer component={Paper}>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  {columns.map((col, index) => (
+                    <TableCell
+                      className="header-cell"
+                      key={index}
+                      align="center"
+                    >
+                      {col.name}
+                      <Select
+                        disableUnderline={true}
+                        className="select"
+                        renderValue={() => null}
+                      >
+                        {Rows.map((row) => {
+                          if (!!row)
+                            return (
+                              <MenuItem value="{row[`${col.id}`]}">
+                                {row[`${col.id}`]}
+                              </MenuItem>
+                            );
+                        })}
+                      </Select>
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Rows.map((row, index) => (
+                  <TableRow key={index} className={row.className}>
+                    <TableCell align="center">{row.status}</TableCell>
+                    <TableCell align="center">{row.driverName}</TableCell>
+                    <TableCell align="center">{row.tripNo}</TableCell>
+                    <TableCell align="center">{row.fleetNo}</TableCell>
+                    <TableCell align="center">{row.location}</TableCell>
+                    <TableCell align="center">{row.workedTime}</TableCell>
+                    <TableCell align="center">{row.remainingTime}</TableCell>
+                    <TableCell align="center">{row.nextBreak}</TableCell>
+                    <TableCell align="center">{row.breach}</TableCell>
+                    <TableCell align="center">{row.lastUpdated}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            marin
+          >
+            <Grid className="pagination" xs={3} item align="center">
+              <Pagination count={5} />
+            </Grid>
+          </Grid>
+        </div>
+      );
+    }
+
+    function App() {
+      return (
+        <Grid justifyContent="center" alignItems="center" container spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h4" component="h1" gutterBottom>
+              EWD Dashboard
+            </Typography>
+          </Grid>
+          <Grid item xs={11}>
+            {DataTable("Exceptions List", 2)}
+            {DataTable("All Drivers", 9)}
+          </Grid>
+          <div class="modal">
+            <div class="modal-content">
+              <span class="close-button">×</span>
+              <h1>Hello, I am a modal!</h1>
+            </div>
+          </div>
+          <ProTip />
+          <Copyright />
+        </Grid>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(
+      <ThemeProvider theme={theme}>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
+    );
+  </script>
+  <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> -->
 </html>
